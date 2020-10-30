@@ -1,0 +1,6 @@
+fcm을 통해 직접 메시지를 보낼 수 있음, 키값과 value로 지정해서 보낼 수도 있음
+
+보내고 나면 보낸 메시지의 내용이 뜨고 <새알림>버튼을 눌러 새로운 메시지를 보낼 수 있고, 기존 내용 복사해서 보낼 수 있음
+
+
+cWbr5lEUR1Wa-fJX-uog-G:APA91bEVFhvOiMKd7R6c3tnnonnGqxUBzzhJwARX3nWsALB9ZiQRxCr_ygD7JwOxW67lFiqvXui9EWAfVp_4XjWXSFtV2uNwB2KtERJkpaLHTNHLXXj93RxJpj1rYrWgfEsBSBtIEVl2

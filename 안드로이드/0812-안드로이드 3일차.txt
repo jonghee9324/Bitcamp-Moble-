@@ -1,0 +1,67 @@
+@프로젝트 import
+- 이클립스 기반 프로젝트
+  git 주소로 가져오기 : file >> new >> project from version control >> git 주소 붙여넣기 >> clone >> 설정 후 피니시
+  포로젝트로 가져오기 : file >> open >> 폴더선택  ( 버전이 다를경우 우측 하단에 gradle 업데이트 문구가 뜨는데 configure 누르기)
+
+- gradle 버전이 다른 프로젝트
+ git 주소로 가져오기 : 이클립스 버전과 동일, 하지만 과정이 간략화됨
+ 받아오면 gradle 버전이 달라서 버전을 바꿔야함
+ 1. gradle-wrapper.properties distributionUrl 을 현재 사용하고 있는 프로젝트의 내용으로 바꿔줌(gradle 실행파일 버전 바꾸기)
+ 2. build.gradle(project)에서 dependencies classpath를 현새 사용중 프로젝트 내용으로 바꿔줌(gradle 플러그인 버전 바꾸기)
+ 3. build.gradle(project)에서 buildscript, allprojects의 repositories에 google()를 jcenter()위에 추가
+
+
+
+@리소스 관리
+프로젝트 밑 res는 리소스의 약자
+리소스는 하드웨어에 대응할 수 있다. (리소스명-하드웨어버전, api버전 등)
+drawable-v24 : api번호 24에서만 v24를 사용할 수 있다.
+리소스명-rand(수평), portrait(?)(수직) 으로 되어있으면 수직, 수평에서 사용
+
+리소스명은 반드시 모두 소문자로 작성
+리소스를 참조하기 위해선 @리소스명/리소스파일
+
+리소스 파일의 경우 
+
+@dpi
+안드로이드에서 도트 사이즈를 말함
+화면 크기 : small, normal, large, xlarge, xxlarge
+화면 밀도(dpi가 얼마나 들어갈지) : ldpi(120), mdpi(160), hdpi(240), xhdpi(320)
+
+화면 크기, 밀도 매칭 ( small - ldpi, normal - mdpi ...... )
+
+
+
+@리소스 - value
+여러가지 값과 관련된 파일을 갖음, 파일 형식은 xml
+ex) string, color 등등등 
+string의 경우 다양한 언어를 지원할 수 있다. 언어 버전에 맞게 리소스를 설정할 수 있다. 단, 리소스 내용은 모두 동일하고 값만 달라야함
+ex) string defualt, 한국어, 영어 리소스 value파일이 있다 가정
+defualt에 name이 1,2,3 인 string 태그 있고 내용이 원 투 쓰리라 하면
+한국어, 영어 리소스 파일에도 name이 1,2,3인 string 태그가 반드시 있어야하고 내용은 달라도된다. 
+만약 한국어 리소스파일에 name이 1,2인 string태그만 존재한다면 defualt에 name3인 string 태그에 에러표시가 됨
+(이유 : 같은 이름의 태그가 버전에 따라서 다르게 표시하기위해 리소스를 만든 것이기 때문)
+
+@코드로 위젯 생성
+리소스 객체를 만들어야함
+
+
+@액티비티 메소드 생성
+code >> override method >> 만들고 싶은 메소드 선택
+
+@액티비티  실행
+액티비티를 실행할때마다 데이터가 실행되어야한다면
+setcontent를 onStart에서 사용
+
+@setcontentview
+액티비티를 실행시키는 메소드, 액티비티의 실행될 위치를 설정하는 메소드에서 사용(onCreate, onStart 등)
+앱 처리시간이 너무 길면 에러가 뜰 수 있음(꺼지는 오류)
+
+@ 동적으로 위젯 id 가져오기
+res.getIdentifier("button"+(i+1), "id", getClass().getPackage().getName()) 사용
+매개변수 : (위젯id, "id", id가 있는 패키지명)
+
+@액티비티에서 액티비티 실행
+안드로이드에서 액티비티간 이동은 Intent로 이루어짐
+Intent.putExtra()로 키, value형태로 값을 전달할 수 있음 (JSP에서 session.setAttribute처럼 사용하지만, 성격은 request와 같음)
+받는 intent는 get데이터타입Extra로 받을 수 있음( 데이터타입은 putExtra로 데이터를 보낼 때 보낸 데이터의 타입 )

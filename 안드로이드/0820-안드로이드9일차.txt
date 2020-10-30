@@ -1,0 +1,2 @@
+apk만들기
+build >> build bundle >>> build apk

@@ -1,0 +1,23 @@
+0902 Serializableimplements
+
+인텐트 객체 전달
+
+객체를 그냥 전달하면 안되고 전달할 객체가 
+Serializable나 Parcelable로 되어 있어야함
+둘 다 직렬화 시켜주는 인터페이스
+
+Serializable 
+java 인터페이스
+사용이 쉽다. 하지만 Reflection를 사용해 직렬화 하여 많은 추가 객체를 생성
+따라서 가비지 컬렉터가 많이 동작함 따라서 성능 저하가 일어남
+
+
+Parcelable로 
+안드로이드 sdk 인터페이스
+사용자가 직렬화 처리 방법을 작성, 따라서 자동으로 직렬화 해주는 Reflection가 필요없음
+사용법이 어렵다. (플레이트 코드 추가 즉, 클래스 이해 어렵고, 기능 추가 힘듦, 유지보수 어려움)
+
+RESULT_OK
+액티비티에만 있기때문에 프레그먼트에서 사용시 그냥 사용할 수 없음
+getActivity.RESULT_OK 사용해야함
+

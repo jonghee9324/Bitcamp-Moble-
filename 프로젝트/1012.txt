@@ -1,0 +1,12 @@
+
+푸시 알림 이미지 아이콘 추가
+
+url을 통해 이미지 생성시 android.os.NetworkOnMainThreadException 에러 발생
+이유 : 메인 스레드에서는 네트워크를 잘못 처리하면 메인 스레드가 멈춰 강제로 분리해서 구현하도록 한듯
+따라서 스레드를 새로 만들어 사용해야함
+
+
+비트맵은 Parcelable를 implements 하고있다 따라서 인텐트로 넘길 수 있다.
+
+번들로 넘길 때는 putParcelable
+intent로 넘길 때는 putParcelable

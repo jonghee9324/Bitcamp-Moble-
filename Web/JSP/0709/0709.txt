@@ -1,0 +1,35 @@
+@executeUpdate, Query
+쿼리는 select문에만
+Update는 delete, insert, update
+
+
+@jdbc 사용법
+1. jdbc 드라이버 로딩
+2. connection 객체 생성
+3. 쿼리문 작성 및 쿼리 연결, 가져오기
+string sql = 어쩌구 저쩌구
+pstmt = conn.prepareStatement(sql)
+rs = pstmt.executeQuery()
+
+4. ResultSet으로 결과보기
+rs.get이 가져오는 형식, get뒤에는 가져오는 데이터의 타입() 인수로는 컬럼명 or 컬럼 번호
+
+@Statement
+Statement	// 정적인 sql ( 사용자가 직접 다 쿼리문을 작성해야함
+prepareStatement	// 실시간에 sql문에 변수 binding(쿼리문에 ?의 값을 set데이터타입(물음표번호, 값) 넣어서 값을 변경)
+callableStatement	// 
+
+
+@DAO (Data Access Object)
+데이터의 접근을 전담하는 객체
+데이터 조회, 삽입, 삭제, 수정을 담당
+
+@DTO
+jsp와 통신
+계증간 데이터 교환을 위한 자바빈즈
+VO(Values Object)패턴이라고함
+일반적으로 DTO는 로직을 갖오있지 않은 데이터 객체로 getter, setter메소드만 갖음 
+
+@for
+자바에서도 파이썬처럼 for문을 리스트의 내용을 1개씩 꺼내서 사용할 수 있음
+for(데이터 타입  변수명 : 리스트객체명) 을 통해서 사용

@@ -1,0 +1,13 @@
+@라즈베리파이 wiringPi
+gpio mode 0 out
+wiringpi에서의 0번핀 (물리적 11번 gpio17번 핀)의 모드를 out으로 바꿈
+
+
+@gpio readall
+wiringpi의 상태를 보여주는 명령어
+
+
+@wiringPi setup
+wiringPiSetup() :핀번호 사용 시 wiringpi의 핀번호 방식으로 사용
+wiringPiSetupGpio() : 핀번호 사용 시 gpio의 핀번호 방식으로 사용
+wiringPiSetupPhys() : 핀번호 사용 시 라즈베리파이 물리적 핀번호 방식으로 사용

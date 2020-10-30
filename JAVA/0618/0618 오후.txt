@@ -1,0 +1,5 @@
+@toString은 
+참조변수 값을 리턴해주는 메소드
+일반적으로 print문에 변수이름만 적어 사용하는 것이 toString이 호출된 것.
+ex ) Car car1 = new Car();
+print(car1) >> car1.toString 이 실행되고, 출력결과는 car1의 참조변수값이 나옴

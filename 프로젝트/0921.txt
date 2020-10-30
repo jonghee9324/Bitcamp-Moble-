@@ -1,0 +1,29 @@
+@ 파이어베이스 addChildEventListener
+ // onChildAdded의 Datasnapshot은 DatabaseReference로 설정한 경로의 child로 시작함
+// 즉, DatabaseReference로 chat을 설정했으면 Datasnapshot은 chat의 child(대화방정보 : uid_uid)가 됨
+// 따라서 Datasnapshot의 .getChildren을 사용하면 push로 넣은 대화의 정보가 나오게 된다.
+// 다른 리스너의 경우 chat으로 DatabaseReference로 Chat을 설정한 경우 .getChildren을 해야 대화방 정보가 나옴
+// previousChildName : 현재 child 이전의 child이름
+
+
+@ addChildEventListener를 통한 데이터 갱신
+데이터 갱신을 위해선 레퍼런스를 갱신할 내용의 path까지 연결해야한다.
+ex) 대화방의 경우 대화내용을 갱신해야하기 때문에
+레퍼런스를 대화방(chat/대화방이름)으로 설정해야함
+이 때 대화방이름을 가져온 리스너 안에 addChildEventListener를 사용함
+
+@ 어댑터에서 finish
+holder.itemview = 리스트뷰의 아이템 레이아웃
+holder.itemview.getContext = 리스트뷰의 아이템 레이아웃을 호출한 주체 (리스트뷰가 있는 액티비티)
+하지만 holder.itemview.getContext는 context타입이라 finish를 사용 못함
+따라서 holder.itemview.getContext를 Activity타입으로 캐스팅 해줘야함
+
+@ 어댑터 notifyItemInserted
+list 2개 사용이 안됨 baselist를 정하고 그 baselist의 사이즈를 기준으로 함
+만약 list 2개 사용시 notifyItemInserted의 포지션을 각각 설정하면 안됨
+ex) a리스트 b리스트 있다 가정
+notifyItemInserted(a.size()-1) 
+notifyItemInserted(b.size()-1) 하면 error
+
+리스트가 clear된 경우 사이즈가 0이기 때문에 a.size()-1를 하면 index범위가 안맞아 error
+따라서 baselist clear 후 notifydatachange를 해줘야함(리스트가 없다는 것을 인식해주기 위함)

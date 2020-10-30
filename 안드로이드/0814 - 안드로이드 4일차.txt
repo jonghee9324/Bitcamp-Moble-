@@ -1,0 +1,63 @@
+@ListView
+리스트 뷰 사용 시 리스트뷰를 갖는 레이아웃 1개, 리스트 뷰의 1줄을 표현할 레이아웃 1개가 필요함
+리스트뷰를 갖는 레이아웃의 리스트뷰는 컨스트레이아웃을 걸어서 화면에 꽉차게 할 것
+
+@ListView 이벤트
+리스트 뷰 이벤트는 2개로 나눌 수 있다. 리스트 뷰 한행 자체의 이벤트
+리스트 뷰 안에서 특정 요소의 이벤트
+-리스트 뷰 한 행에 이벤트를 넣을 경우 onCreate부분에 
+listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                
+            }
+        });
+
+-리스트 뷰 특정 요소에서 이벤트를 하고 싶은 경우 
+getView에서 해당 위젯에 이벤트 추가 
+
+
+
+@레이아웃
+weight를 0dp로 주면 길이가 최대로 맞춰짐
+constraint를 탑끼리 연결하면 같은 탑 라인이 생성 됨
+위젯간의 간격은 16dp이상 주는게 좋음 
+
+@라이프사이클
+oncreate에 무한루프를 건다고해도 안드로이드는 라이프사이클을 진행한다.
+
+@Adapter 생성
+어뎁터 클래스를 상속받음
+어뎁터 생성시 액티비티와 Adapter클래스는 메모리상에서 다른곳에 위치하기 때문에
+액티비티의 내용을 어뎁터 클래스에 저장을 해줘야 액티비티의 내용을 사용할 수 잇음
+따라서 나중에 클래스에서 액티비티의 내용을 참조해서 쓸 수 없음 필요한 것은 생성자에서 저장해 둘 것 
+
+상속받은 어뎁터 클래스에서 기본적으로 context, 리소스id, 오브젝트를 받도록 됨
+오브젝트를 받는 이유는 리스트뷰에서 몇개의 항목을 만들어야하는지 카운트 하기 위함
+
+@getView()
+인수 : (int position, @Nullable View convertView, @NonNull ViewGroup parent )
+  position : 리스트 뷰에서 인덱스  
+  convertView : 리스트 뷰에서 리스트 한줄에 해당 (리스트 뷰 한줄의 레이아웃)
+  parent : 리스트 뷰  
+
+// 처음 리스트 뷰의 한줄을 그릴때, 즉, 처음 앱을 실행해서 앱을 내리게 되면 그릴 때 사용 
+if(convertView ==null){	
+	   // inflate는 비용이 많이 듦, 레이아웃을 매핑해서 그림, 가급적 안사용하는게 좋음
+                view = View.inflate(mContext, R.layout.listitem_picture, null);
+}
+// 한 번 내린 뒤 다시 올리게 되면 기존에 그렸던 내용을 다시 사용하기 위함
+else{
+                view = convertView;
+}
+
+
+
+@모듈복사
+모듈을 복사하면 바로 안보임
+그럴 때 settings.gradle에 inclue':추가한 모듈명' 내용 추가 후 sync now
+
+
+@이벤트 리스너 view
+이벤트 리스너에서 받아오는 view 는 이벤트를 설정한 위젯. 따라서 
+Button에 이벤트를 설정한 경우 view는 Button이 되고 이 때 사용하기 위해서는 Button으로 형 변환을 해줘야함

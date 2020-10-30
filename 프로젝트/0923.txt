@@ -1,0 +1,22 @@
+@메인피드에서 프로필을 누른 후 마이페이지 클릭
+
+프래그먼트의 갱신이 안됐음, onResume에 프래그먼트 내용을 초기화하는 내용을 넣었지만 안 됨
+
+해결: 프래그먼트 새로고침
+
+전에도 아래 코드를 프래그먼트에 onResume에사용했지만 정상 동작이 하지 않음
+ 
+FragmentTransaction ft = getFragmentManager().beginTransaction(); 
+ft.detach(this).attach(this).commit();
+하지만 이번엔 메인액티비티에 사용해 해결
+액티비티에서 사용했기때문에 getFragmentManager()은 FragmentTransaction 타입이 아니였음 따라서 getSupportFragmentManager로 사용(이미 메뉴이벤트에서 객체를 생성해 그 객체 사용)
+this부분은 프래그먼트에서 this이기 때문에 메인액티비티에서는 새로고침할 프래그먼트의 객체를 사용 mypage로 넘어가는 것이기 때문에 
+mypagefrag사용
+commit은 메뉴 클릭의 마지막부분에 있어서 ft.detach(this).attach(this)만 사용
+
+왜 새로고침을 사용할 때 되는지는 잘 모르겠음
+
+
+@파이어베이스 Auth
+파이어베이스 Auth는 내부저장소에 파이어베이스 유저의 정보가 담기고 로그인한 사람의 내용이 내부저장소에 알아서 저장함
+그래서 CurrentUser를 사용하면 처음 로그인한 이후에 계속해서 사용할 수 있음

@@ -1,0 +1,33 @@
+라즈베리파이에서 vnc 뷰어 들어가보면 와이파이의 주소가
+192.168.0.18/24 로 됨 24는 255.255.255.0가 됨 ( 255.255.0.0의 경우 / 16이 됨 255 는 8비트로 계산되기 때문 ) 
+
+
+@ifconfig
+ git bash에서 ssh pi@192.168.0.247 을 통해 라즈베리파이에 들어가
+ifconig를 치게 되면 연결된 ip의 주소들이 뜬다.
+eth0 : 유선으로 연결된 ip주소, 내용중 ether는 Mac address
+wlan0 : 연결된 와이파이 ip주소
+
+
+@nmap
+arp -av를 통해 핑테스트를 한 모든 ip를 볼 수 있고 ip에 어떤 Mac 어드레스가 연결됐는지 확인할 수 있다.
+인터페이스 : 192.168.0.40
+인터넷주소 물리적주소로 나온다. (인터넷주소 : ip, 물리적 주소 : Mac어드레스)
+즉, 인터넷 주소에 연결된 Mac address를 보여준다. 
+Mac 어드레스는 ssh에 접속해 ifconfig를 통해 확인 가능하다.
+
+@ssh pi@아이피주소
+라즈베리파이에 들어가는 명령어
+나올때는 exit로 나옴
+
+@clear
+터미널 창의 내용을 지워줌
+
+@sudo
+퍼미션 상 owner의 권한을 얻는 것 기본적으로는 other
+
+@ | (pipe)
+ex)
+ cat /proc/cpuinfo | grep processor | wc -l 
+car /proc/cpuinfo의 내용을 grep processor로 넘어감 (즉 , 앞의 내용의 출력이 뒤 내용의 입력이됨 따라서 car /proc/cpuinfo의 출력들로 grep을 실행)
+grep processor의 출력물로 wc -l 명령어 실행

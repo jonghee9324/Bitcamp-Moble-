@@ -1,0 +1,72 @@
+@group by
+where 엔 그룹 함수를 사용할 수 없음
+그룹함수는 그룹by를 사용한 것만 사용할 수 있음
+
+@count(*) 컬럼명
+컬럼명의 수를 보여줌, 이 때 count와 컬럼명은 띄워쓰기
+
+
+@having
+where절에 사용하지 못한 부분을 having에서 사용할 수 있음
+ex)
+select department_id, count(*), sum(salary) 
+from employees 
+group by department_id 
+having sum(salary) > 20000; (사용가능)
+
+select department_id, count(*), sum(salary) 
+from employees 
+where sum(salary) > 20000;	(사용불가)
+group by department_id 
+
+@case ~ end (if else if else 와 비슷)
+SELECT employee_id, salary, 
+CASE WHEN job_id = 'AC_ACCOUNT' THEN salary + salary * 0.1
+        WHEN job_id = 'AC_MGR' THEN salary + salary *0.2 
+        ELSE salary (when 절에 해당이 안된다면)
+END job_id  (출력에  job_id라는 컬럼이 생김)
+FROM employees;
+
+case~end 문은 컬럼명을 만들고 그 컬럼에 들어가는 값을 지정함
+end문 뒤에 붙는 것은 별칭, 붙이지 않으면 case~end절이 컬럼명으로 나옴
+
+ex) 
+end문 뒤에 별칭을 붙이지 않으면
+CASE WHEN job_id = 'AC_ACCOUNT' THEN salary + salary * 0.1
+        WHEN job_id = 'AC_MGR' THEN salary + salary *0.2 
+        ELSE salary (when 절에 해당이 안된다면)
+END 이 한줄로 컬럼명으로 들어감
+
+
+@조인
+null값은 조인이 안됨, 조인연산은 최소 from절에 사용한 테이블 수보단 1개 적어야함
+from 절에 2개의 테이블이 들어감, 이 때 테이블명 뒤에 별칭을 쓸 수 있음 별칭은 ' ' 로 적지 않고 그냥 바로 적음
+ex) 
+employees em, department de
+
+where절로 조건을 주지 않으면 기본적으로 카디션 프러덕트가 일어남
+
+조인을 하기 위해선 from절에 필요한 모든 테이블을 다 적는다.
+이 때 테이블이름 뒤에 별칭(alias)를 적어주는 것이 좋음
+where절에 조건을 구현
+
+@ outer 조인
+널값이 올 수 있는 곳에 아우터 조인을 사용할 것
+null값으로 조인을 못하는 튜플도 조인이 가능하게 만들어줌 
+레프트 아우터조인, 라이트 아우터 조인 등 있다
+from 절에 테이블 명 left outer join  테이블명 on 조건(where절에 적을 내용)
+또는 일반 조건문과 똑같이 사용하고 where절 오른쪽 피 연산자에 뒤에( + )
+ex)
+left outer join
+select * from departments;
+select first_name||' '||last_name, de.department_name, jb.job_title
+from employees em, departments de, jobs jb
+where em.department_id = de.department_id(+) and em.job_id = jb.job_id(+);
+
+또는
+
+select * from departments;
+select first_name||' '||last_name, de.department_name, jb.job_title
+from employees em, departments de, jobs jb
+where em.department_id(-) = de.department_id and em.job_id(+) = jb.job_id;
+

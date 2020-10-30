@@ -1,0 +1,148 @@
+@안드로이드
+안드로이드에서  main이 Activity 창
+프로젝트 버전은 마시멜로우
+
+@안드로이드 스튜디오
+- 안드로이드 프로젝트 생성시 gradle을 다운 받음, 받아야 됨
+
+- 하단부분에 오류내용을 보기 위해 Logcat이 존재
+
+- gradle이 다운받아지면 app폴더가 열리고 java 폴더가 생김, 자바폴더를 열면뜨는 폴더들이 패키지 
+
+- app 밑에 build.gradle이 있고 gredle 밑에 build.gradle 있는데 같은 것은 아님
+gradle 밑의 build.gradle 
+repositories {
+        google()	// 반드시 구글이 먼저 와야함
+        jcenter()
+} 
+
+app밑 build.gradle 
+
+안드로이드 클래스는 안드로이드를 만들기 위한 모든것이 다 적혀있음
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+
+    defaultConfig {				// apk로 만들어 질 때 
+        applicationId "com.example.myapp"	// 패키지 이름(패키지 이름은 같을 수 없음 다 다름), 
+        minSdkVersion 23			// 최소 필요한 sdk 버전
+        targetSdkVersion 30
+        versionCode 1			// 어플리케이션의 버전 코드, (구글 플레이에 올리고 내릴 때 코드로 사용) 
+        versionName "1.0"			// 어플리케이션의 버전 이름
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {		// 디버그인지 릴리즈인지 판단
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+@업로드 시 도메인 이름
+도메인명은 거꾸로 쓴다.
+ex) 네이버의 경우
+com.naver
+
+@sync now
+일반적인 빌드라고 생각할것 
+우측 상단의 코끼리 모양 또는 파일 sync 어쩌구 gradle file 과 같은 역할 
+
+@Run
+한 번 run을 시키면 그 다음엔 2가지 방식으로 런을 할 수 있음
+1. 변경내용만 바꿔서 실행
+2. 새로 애뮬레이터 실행
+
+@settings.gradle 
+gradle script폴더 밑에 있음 (gradle script는 gradle 다운 시 자동으로 생김 )
+include ':' : 콜론 뒤에 적히는 부분은 프로젝트 탐색기에서 보여줄 것을 설정하는것
+
+@gradle 버전
+gradle script 안에 있는게 플러그인이고 
+프로젝트 생성시 설치되는 그래들이 실제 실행파일
+두개의 버전이 다르지만 플러그인 버전으로 실행파일 버전의 그래들을 실행시킴
+
+@안드로이드 4가지 클래스
+Activity : 사진을 가져오고 작업을 할 수 있게 하는 것
+나머지 3개는 백그라운드로 실행 우선 Activity를 숙달할것
+4가지 클래스 사용하기위해 extends 
+
+@setContentView(R.layout.activity_main)
+실제로 만든 액티비티 창을 보여주는 메소드
+activity_main에 커서를 가져가고 컨트롤 b를 누르면 실행될 화면의 모양을 볼 수 있음
+다른곳에서 컨트롤 + b를 누르면 원본 소스파일이 열림
+
+activity_main에서 컨트롤b를 누르고 우측에 design과 split이 있음 스플릿으로 누르면 코드랑 같이 볼 수 있음
+
+메소드를 실행을 안시키면 빈 화면만 나옴
+
+@레이아웃
+액티비티 화면 하나당 레이아웃은 1개씩 생김
+레이아웃은 app 폴더의  res밑 layout 폴더에 있음 레이아웃 파일은 .xml 파일로 생성
+레이아웃은 코드로 설정하거나, 툴을 사용해서 설정할 수 있음 툴로 설정하면 자동으로 코드가 작성됨
+
+design의 상하좌우 설정부분에서 x표시를 누르면 관계가 사라짐 (컨트롤의 사각에 있는 화살표)
+레이아웃에서 사이즈 단위는 dp px(x)
+
+@manifests
+app 폴더밑에 있는 폴더로 프로젝트에서 사용될 환경을 설정하는 것.
+layout.xml파일도 이 파일에 저장되지 않으면 실행되지않음. 기본적으로 activity 생성 시 코드가 추가되지만
+layout.xml파일만 새로 생성하면 추가할 파일을 manifest에 추가해줘야함
+
+@R클래스
+안드로이드에서 사용할 수 있게 만들어 둔 클래스 스태틱 타입으로 선언됨
+그렇기 때문에 R.으로 클래스이름으로 접근 가능
+
+@<intent-filter>
+여러개의 액티비티중 디폴트로 실행시킬 액티비티를 설정하는 태그
+<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+</intent-filter>
+
+@Widget
+lay에 배치되는 모든것을 호칭 
+Button, text, 등등등 다 View를 상속받아 만든 것으로 위젯이라 불림
+모든 위젯은  weight, height는 반드시 있어야 함
+wrap_content : 위젯의 크기가 글자에 따라 변경
+match_parent : 위젯의 크기가 화면의 창 사이즈에 따라 변경
+
+@view group
+frame, linearlayout가 기본
+
+
+@Log. i/d/w 
+log.로그종류("오류표시", "오류메시지");
+- 로그종류
+  i : info
+ d : debug
+ 
+logcat 에 오류메시지를 찍어줌
+
+@이벤트처리
+레이아웃을 xml파일에서 짜고 xml파일의 위젯의 아이디를 가지고 이벤트처리를 액티비티에서 함
+객체.set이벤트명 으로 해당객체에 이벤트 설정
+사용법 : Button 객체명 = findViewById(R.id.button)
+btn.setsetOnClickListener() : btn객체에 클릭이벤트 설정, 매개변수로는 이벤트 클래스가 들어감
+ex)
+btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {            
+
+            }
+        });
+OnClickListener은 View 클래스 내부 인터페이스로 정의 따라서 new 해서 객체로 만들어줘야 함
+
+
+@findViewById(R.id.위젯id명)
+findViewById(R.id.button) : 레이아웃에서 button이라는 id를 가진 객체를 가져옴
+반환값이 View이기 때문에 사용할 객체에 따라 타입캐스팅 해줘야함
+
+@setText
+int 값을 넣을 수 있지만 자체적으로 오류가 뜨기때문에 문자열로 넣어줘야함
+이유 : 안드로이드는 리소스ID를 int형으로 사용하기 때문에 int인지 리소스ID인지를 구분하지 못해 에러 처리
+ex) result.setText("결과 : "+(Integer.parseInt(math) + Integer.parseInt(eng)));

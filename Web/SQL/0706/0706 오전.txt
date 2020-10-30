@@ -1,0 +1,79 @@
+@서브 쿼리
+서브쿼리가 단일행의 경우 where절에 있어도되지만 다중행의 경우 from절에 쓰는 것이 좋음
+
+@any ( or )
+서브쿼리가 다중행의 경우 앞의 연산자에 따라 or가 걸린다
+ex)
+돈 > any (서브쿼리)의 경우
+서브쿼리가 1200, 80 이라할 때 결과는
+돈 >1200 or 돈 >80
+
+@all( and )
+any 와 마찬가지이며, any와 달리 and의 의미.
+
+@in
+in은 속하는 것을 찾는 문구이다. in은 1개의 대상이 여러개의 조건에 속하는지 확인하는 것이지만,
+여러개의 대상이 여러 조건에 속하는지 확인이 가능하다.
+ex)
+(salary, department_id) in (select max(salary) ms, department_id  di from employees group by department_id )
+
+@rollup
+자동으로 결과를 합산해주는 테이블을 만듦
+그룹 바이를 하면 그룹바이에 속하지 않은 컬럼은 select절에 올 수 없음
+
+@group by
+2가지 이상으로 group by 를 쓸 경우 ()로 묶어주기
+
+@listagg(리스트로 만들 컬럼명, 구분자) ~ within group(정렬 방법 - order by) 별명
+(별명을 안하면 listagg~within group이 컬럼명으로 들어감)
+
+@decode(비교1, 비교2, 보여줄값)
+비교1과 비교2를 비교해서 같으면 보여줄 값을 출력해줌
+틀리면 null
+
+@order by 
+숫자가 오면 select 컬럼 위치에 따른 정렬이 됨. 
+ex)
+order by 1은 select 절의 1번 컬럼 기준으로 정렬, by 2는 2번 컬럼
+select id, pass, name from emp order by 1 // id를 기준으로 정렬
+select id, pass, name from emp order by 2 // pass를 기준으로 정렬
+
+@rank(조건값) within group(order by 랭크를 찾을 조건)
+조건값이 랭크를 찾을 조건에서 몇 등인지 알려줌
+
+@계정관리
+system 계정에서 해야함
+사용자 생성 : create user 생성할 계정이름 IDENTIFIED BY 생성할 계정비밀번호;
+비번변경 : ALTER USER 계정이름 IDENTIFIED BY 변경할 비밀번호;
+접속권한 : grant resource, connect to 생성된 계정이름;
+계정삭제 : drop user 계정이름 cascade;
+
+
+<DCL>
+@테이블생성
+char로 컬럼생성 시 지정 사이즈만큼 반드시 다 적어줘야한다.
+varcher는 char의 고정 길이 문제를 해결할 수 있고 1자리부터 사이즈까지 입력할 수 있음
+
+@db datatype
+이미지는 raw 타입으로 사용
+로그를 작성할땐 timestamp 타입으로 사용
+
+@컬럼삭제
+ALTER table 테이블명 drop(컬럼명)
+해당 컬럼에 데이터가 들어가면 삭제 안됨
+
+@테이블삭제
+drop table 테이블명
+
+@테이블 이름 변경
+rename 테이블명 to 변경할 테이블명
+
+@시퀀스
+CREATE SEQUENCE seq_author_id 
+INCREMENT BY 1 	// 증가값
+START WITH 1 ;	// 초기값
+
+초기값에서 증가값 만큼 증가하는 변수를 create한 것
+값을 가져올땐 시퀀스 변수명.nextval
+응용 : INSERT INTO author VALUES (seq_author_id.nextval, '박경리', '토지 작가 ' );
+

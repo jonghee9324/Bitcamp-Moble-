@@ -1,0 +1,31 @@
+#include <stdio.h>
+void sum(int a, int b, int c) {
+	printf("세 수 합 : %d\n", a + b + c);
+}
+void sub(int a, int b, int c) {
+	printf("세 수 차 : %d\n", a - b - c);
+	return ;
+}
+void mul(int a, int b, int c) {
+	printf("세 수 곱 : %d\n", a * b * c);
+	return ;
+}
+void dev(int a, int b, int c) {
+	printf("세 수 나누기 : %d\n", (int)((float)a / (float)b / (float)c));
+	return ;
+}
+void na(int a, int b, int c) {
+	printf("세 수 나머지 : %d\n", (int)((float)a / (float)b / (float)c) % 5);
+	return ;
+}
+void main() {
+	int a, b, c, choice;
+	int (*func[5])(int, int, int) = { sum, sub, mul, dev, na};
+	printf(" 숫자 입력 : ");
+	scanf("%d %d %d", &a, &b, &c);
+	printf("1. 덧셈, 2. 뺄셈, 3. 곱셈, 4.나눗셈, 5.나머지\n");
+	printf("메뉴 입력 : ");
+	scanf("%d", &choice);
+	func[choice - 1](a, b, c);
+
+}
